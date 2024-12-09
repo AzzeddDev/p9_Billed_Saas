@@ -38,14 +38,14 @@ class Datepicker {
         window.onresize = () => { if (t.display_state) show(true); }; // to update screen position
         document.addEventListener("click", e => {
             if (
-                e.target == document.getElementById("datepicker") &&
+                e.target === document.getElementById("datepicker") &&
                 !document.getElementById("datepicker-frame")
             ) {
                 t.load("day"); // Start date when opening
                 show(true);
             }
             else if (
-                document.getElementById("datepicker-frame") != null &&
+                document.getElementById("datepicker-frame") !== null &&
                 !e.path.includes(document.getElementById("datepicker-frame"))
             ) show(false);
         });
@@ -62,12 +62,12 @@ class Datepicker {
             t.table.className = n;
             
             // If data is month
-            if (n == "day") {
+            if (n === "day") {
                 // Prev
                 const prev = document.createElement("li");
                 t.head.append(prev);
                 prev.innerHTML = "<<";
-                if (t.firstdate == undefined || (
+                if (t.firstdate === undefined || (
                     t.date.getMonth() > t.firstdate.getMonth() ||
                     t.date.getFullYear() > t.firstdate.getFullYear())
                 ) {
@@ -92,7 +92,7 @@ class Datepicker {
                 const next = document.createElement("li");
                 t.head.append(next);
                 next.innerHTML = ">>";
-                if (t.lastdate == undefined || (
+                if (t.lastdate === undefined || (
                     t.date.getMonth() < t.lastdate.getMonth() ||
                     t.date.getFullYear() < t.lastdate.getFullYear())
                 ) {
@@ -126,17 +126,17 @@ class Datepicker {
                         tr.append(td);
                         td.innerHTML = day.getDate();
                         
-                        if (day.getMonth() == t.date.getMonth() && t.disableddays(day) && (
-                            t.firstdate == undefined ? true : (
-                                day.getMonth() == t.firstdate.getMonth() ? (
-                                    day.getFullYear() == t.firstdate.getFullYear() ?
+                        if (day.getMonth() === t.date.getMonth() && t.disableddays(day) && (
+                            t.firstdate === undefined ? true : (
+                                day.getMonth() === t.firstdate.getMonth() ? (
+                                    day.getFullYear() === t.firstdate.getFullYear() ?
                                         day.getDate() >= t.firstdate.getDate() : true
                                 ) : true
                             )
                         ) && (
-                            t.lastdate == undefined ? true : (
-                                day.getMonth() == t.lastdate.getMonth() ? (
-                                    day.getFullYear() == t.lastdate.getFullYear() ?
+                            t.lastdate === undefined ? true : (
+                                day.getMonth() === t.lastdate.getMonth() ? (
+                                    day.getFullYear() === t.lastdate.getFullYear() ?
                                         day.getDate() <= t.lastdate.getDate() : true
                                 ) : true
                             )
@@ -147,7 +147,7 @@ class Datepicker {
                                 show(false);
                             };
                         } else td.className = "disabled";
-                        td.className += day.toDateString() == new Date().toDateString() ? " today" : "";
+                        td.className += day.toDateString() === new Date().toDateString() ? " today" : "";
     
                         index++;
                     }
@@ -155,12 +155,12 @@ class Datepicker {
             }
             
             // If data is year
-            else if (n == "month") {
+            else if (n === "month") {
                 // Prev
                 const prev = document.createElement("li");
                 t.head.append(prev);
                 prev.innerHTML = "<<";
-                if (t.firstdate == undefined || (
+                if (t.firstdate === undefined || (
                     t.date.getFullYear() > t.firstdate.getFullYear())
                 ) {
                     prev.className = "pointer";
@@ -179,7 +179,7 @@ class Datepicker {
                 const next = document.createElement("li");
                 t.head.append(next);
                 next.innerHTML = ">>";
-                if (t.lastdate == undefined || (
+                if (t.lastdate === undefined || (
                     t.date.getFullYear() < t.lastdate.getFullYear())
                 ) {
                     next.className = "pointer";
@@ -202,8 +202,8 @@ class Datepicker {
                         cell.innerHTML = months_short[index];
                         
                         if (
-                            (t.firstdate != undefined ? day.getTime() >= new Date(t.firstdate).setDate(1) : true) &&
-                            (t.lastdate != undefined ? day.getTime() <= new Date(t.lastdate).setDate(1) : true)
+                            (t.firstdate !== undefined ? day.getTime() >= new Date(t.firstdate).setDate(1) : true) &&
+                            (t.lastdate !== undefined ? day.getTime() <= new Date(t.lastdate).setDate(1) : true)
                         ) {
                             cell.className = "pointer";
                             cell.onclick = () => {
@@ -236,10 +236,10 @@ class Datepicker {
         this.disableddays = s.disableddays || this.disableddays || (() => { return true; });
         this.format = s.format || this.format || ((d) => { return d; });
 
-        if (typeof this.firstdate != "object" && this.firstdate != undefined) console.error("firstdate is not of type Object");
-        else if (typeof this.lastdate != "object" && this.lastdate != undefined) console.error("lastdate is not of type Object");
-        else if (typeof this.disableddays != "function") console.error("disableddays is not of type function");
-        else if (typeof this.format != "function") console.error("format is not of type function");
+        if (typeof this.firstdate !== "object" && this.firstdate !== undefined) console.error("firstdate is not of type Object");
+        else if (typeof this.lastdate !== "object" && this.lastdate !== undefined) console.error("lastdate is not of type Object");
+        else if (typeof this.disableddays !== "function") console.error("disableddays is not of type function");
+        else if (typeof this.format !== "function") console.error("format is not of type function");
 
         const d = new Date();
         let date = d;
@@ -270,6 +270,6 @@ class Datepicker {
         }
         this.date = date;
         this.host.value = this.format(date);
-        if(typeof this.host.onchange == "function") this.host.onchange();
+        if(typeof this.host.onchange === "function") this.host.onchange();
     }
 }
