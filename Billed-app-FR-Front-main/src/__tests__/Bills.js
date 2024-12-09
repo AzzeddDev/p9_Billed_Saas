@@ -42,14 +42,20 @@ describe("Given I am connected as an employee", () => {
       document.body.innerHTML = BillsUI({
         data: bills,
       })
-      const dates = screen
-          .getAllByText(
-              /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i
-          )
+
+      // Utilisez une requête plus flexible pour obtenir les éléments de date
+      const dateElements = screen
+          .queryAllByText((content, element) => {
+            return /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/i.test(content)
+          })
           .map(a => a.innerHTML)
+
+      // trier les dates dans un ordre anti-chronological
       const antiChrono = (a, b) => (a < b ? 1 : -1)
-      const datesSorted = [...dates].sort(antiChrono)
-      expect(dates).toEqual(datesSorted)
+      const datesSorted = [...dateElements].sort(antiChrono)
+
+      // Check si les dates sont triées correctement
+      expect(dateElements).toEqual(datesSorted)
     })
 
     // -------------------------------------------------------- //

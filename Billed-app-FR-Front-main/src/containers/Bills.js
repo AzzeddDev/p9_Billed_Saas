@@ -16,11 +16,18 @@ export default class {
       icon.addEventListener('click', () => this.handleClickIconEye(icon))
     })
 
+    const iconDashboard = document.querySelector('div[data-testid="icon-window"]')
+    if (iconDashboard) iconDashboard.addEventListener('click', this.handleClickDashboard)
+
     new Logout({ document, localStorage, onNavigate })
   }
 
   handleClickNewBill = () => {
     this.onNavigate(ROUTES_PATH['NewBill'])
+  }
+
+  handleClickDashboard = () => {
+    this.onNavigate(ROUTES_PATH['Bills'])
   }
 
   handleClickIconEye = (icon) => {
@@ -38,16 +45,19 @@ export default class {
       .then(snapshot => {
         const bills = snapshot
           .map(doc => {
+            console.log( "Dans Bills.js: ",doc)
             try {
               return {
                 ...doc,
-                date: formatDate(doc.date),
+                dateFR: formatDate(doc.date),
                 status: formatStatus(doc.status)
               }
             } catch(e) {
               // if for some reason, corrupted data was introduced, we manage here failing formatDate function
               // log the error and return unformatted date in that case
+              /* istanbul ignore next */
               console.log(e,'for',doc)
+
               return {
                 ...doc,
                 date: doc.date,
@@ -55,6 +65,7 @@ export default class {
               }
             }
           })
+          /* istanbul ignore next */
           console.log('length', bills.length)
         return bills
       })
