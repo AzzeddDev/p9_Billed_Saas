@@ -5,6 +5,7 @@ export default class NewBill {
   constructor({ document, onNavigate, store, localStorage }) {
     this.document = document
     this.onNavigate = onNavigate
+
     this.store = store
     const formNewBill = this.document.querySelector(`form[data-testid="form-new-bill"]`)
     formNewBill.addEventListener("submit", this.handleSubmit)
@@ -13,8 +14,12 @@ export default class NewBill {
     this.fileUrl = null
     this.fileName = null
     this.billId = null
+
+    const iconDashboard = document.querySelector('div[data-testid="icon-window"]')
+    if (iconDashboard) iconDashboard.addEventListener('click', this.handleClickDashboard)
     new Logout({ document, localStorage, onNavigate })
   }
+
   handleChangeFile = e => {
     e.preventDefault()
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
@@ -62,6 +67,7 @@ export default class NewBill {
   }
 
   // not need to cover this function by tests
+  /* istanbul ignore next */
   updateBill = (bill) => {
     if (this.store) {
       this.store
