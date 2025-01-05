@@ -158,7 +158,7 @@ describe("Given I am connected as an employee", () => {
       })
     })
 
-    //TODO 6 test d'intégration GET
+    //
     describe("When I navigate to Bills Page", () => {
       test("fetches bills from mock API GET", async () => {
         jest.spyOn(mockedStore, "bills")
