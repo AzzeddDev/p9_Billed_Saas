@@ -10,17 +10,23 @@
 
 #### Cloner le repository :
 
-``git clone https://github.com/AzzeddDev/p9_Billed_Saas``
+```
+git clone https://github.com/AzzeddDev/p9_Billed_Saas
+```
 
 ---------------
 
 ### Installation Back-end :
 
 #### Accéder au repertoire du projet :
-``cd Billed-app-FR-Back-main``
+```
+cd Billed-app-FR-Back-main
+```
 
 #### Installer les dépendances du projet :
-``npm install``
+```
+npm install
+```
 
 #### Lancer l'API :
 ```
